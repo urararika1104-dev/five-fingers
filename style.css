@@ -1,192 +1,457 @@
-/* ========================================
+/* ==================================================
    五本指診断 - デザイン
-======================================== */
+   ================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+:root {
+    --bg: #08090c;
+    --bg-light: #111318;
+    --panel: #15171d;
+    --panel-light: #1c1f27;
+    --text: #eeeeee;
+    --text-muted: #8f949f;
+    --border: #30343d;
+
+    --thumb: #d93636;
+    --index: #58d9ff;
+    --middle: #a66cff;
+    --ring: #ff9d45;
+    --pinky: #4d7cff;
+}
 
 * {
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            #292d38 0%,
+            #111319 35%,
+            var(--bg) 75%
+        );
+
+    color: var(--text);
     font-family:
-        -apple-system,
-        BlinkMacSystemFont,
         "Noto Sans JP",
         "Yu Gothic",
         sans-serif;
 
-    background: #f3f3f3;
-    color: #222;
+    min-height: 100vh;
 }
 
-.container {
-    width: min(700px, 90%);
-    margin: 60px auto;
+/* 背景の5色 */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(217,54,54,0.035),
+            transparent 20%,
+            transparent 80%,
+            rgba(77,124,255,0.035)
+        );
+
+    pointer-events: none;
 }
 
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+/* 全体 */
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
 }
 
-h1 {
+/* 画面 */
+
+.screen {
+    width: min(900px, 100%);
+}
+
+/* ==================================================
+   タイトル画面
+   ================================================== */
+
+.title-screen {
     text-align: center;
-    margin-top: 0;
-    font-size: 36px;
+}
+
+.logo-small {
+    color: #777c86;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    margin-bottom: 18px;
+}
+
+.title {
+    font-size: clamp(42px, 8vw, 82px);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--thumb),
+            var(--index),
+            var(--middle),
+            var(--ring),
+            var(--pinky)
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 40px;
+    color: var(--text-muted);
+    margin-top: 15px;
+    font-size: 15px;
+    letter-spacing: 0.15em;
 }
 
-.progress {
-    text-align: center;
-    color: #777;
-    margin-bottom: 20px;
-}
-
-.question {
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
-
-/* 回答ボタン */
-
-.answers {
+.finger-line {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    width: min(550px, 90%);
+    height: 4px;
+    margin: 45px auto;
 }
 
-.answer-button {
-    width: 100%;
-    padding: 16px 20px;
-
-    border: 2px solid #ddd;
-    border-radius: 12px;
-
-    background: white;
-    color: #222;
-
-    font-size: 16px;
-    cursor: pointer;
-
-    transition:
-        background 0.15s,
-        border-color 0.15s,
-        transform 0.15s;
-}
-
-.answer-button:hover {
-    background: #f0f0f0;
-    border-color: #999;
-    transform: translateY(-2px);
-}
-
-.answer-button:active {
-    transform: translateY(0);
-}
-
-/* 結果 */
-
-.result-title {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 30px;
-}
-
-.ranking {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.ranking-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 18px 20px;
-
-    border-radius: 12px;
-    background: #f3f3f3;
-
-    font-size: 18px;
-}
-
-.ranking-item.first {
-    font-size: 22px;
-    font-weight: bold;
-    background: #e8e8e8;
-}
-
-.rank {
-    width: 50px;
-    font-weight: bold;
-}
-
-.finger-name {
+.finger-line span {
     flex: 1;
 }
 
-.score {
-    font-weight: bold;
+.finger-line .thumb {
+    background: var(--thumb);
+}
+
+.finger-line .index {
+    background: var(--index);
+}
+
+.finger-line .middle {
+    background: var(--middle);
+}
+
+.finger-line .ring {
+    background: var(--ring);
+}
+
+.finger-line .pinky {
+    background: var(--pinky);
+}
+
+/* ==================================================
+   ボタン
+   ================================================== */
+
+button {
+    font-family: inherit;
+}
+
+.start-button,
+.next-button,
+.retry-button {
+    border: 1px solid #555b67;
+    background: #181b21;
+    color: white;
+
+    padding: 16px 42px;
+
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background 0.15s,
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.start-button:hover,
+.next-button:hover,
+.retry-button:hover {
+    background: #242832;
+    border-color: #9da3ae;
+    transform: translateY(-2px);
+}
+
+.start-button:active,
+.next-button:active,
+.retry-button:active {
+    transform: translateY(0);
+}
+
+/* ==================================================
+   質問画面
+   ================================================== */
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+
+    margin-bottom: 15px;
+}
+
+.progress-container {
+    height: 3px;
+    background: #252831;
+    margin-bottom: 45px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--thumb),
+            var(--index),
+            var(--middle),
+            var(--ring),
+            var(--pinky)
+        );
+
+    transition: width 0.3s ease;
+}
+
+.question-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.035),
+            rgba(255,255,255,0.01)
+        );
+
+    border: 1px solid var(--border);
+
+    padding: clamp(30px, 6vw, 65px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.35);
+}
+
+.question-number {
+    color: #777d88;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    margin-bottom: 25px;
+}
+
+.question-text {
+    font-size: clamp(21px, 4vw, 31px);
+    line-height: 1.8;
+    font-weight: 700;
+    margin: 0 0 45px;
+}
+
+/* 回答 */
+
+.answers {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.answer-button {
+    min-height: 100px;
+
+    border: 1px solid #343944;
+    background: #101217;
+
+    color: #c9ccd2;
+
+    padding: 14px 8px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background 0.15s,
+        border-color 0.15s,
+        color 0.15s;
+}
+
+.answer-button:hover {
+    background: #1e222b;
+    border-color: #858b97;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.answer-number {
+    display: block;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.answer-label {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ==================================================
+   結果画面
+   ================================================== */
+
+.result-screen {
+    text-align: center;
+}
+
+.result-label {
+    color: #777d88;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
+}
+
+.result-finger {
+    font-size: clamp(48px, 10vw, 90px);
+    font-weight: 900;
+    margin: 0;
+}
+
+.result-subtitle {
+    color: #999ea8;
+    letter-spacing: 0.2em;
+    margin-top: 8px;
 }
 
 .result-description {
-    margin-top: 30px;
-    padding: 20px;
+    max-width: 650px;
+    margin: 35px auto 50px;
 
-    background: #f5f5f5;
-    border-radius: 12px;
-
-    line-height: 1.8;
+    color: #c5c8ce;
+    line-height: 2;
 }
 
-.restart-button {
-    display: block;
-    width: 100%;
+/* ランキング */
 
-    margin-top: 30px;
-    padding: 16px;
-
-    border: none;
-    border-radius: 12px;
-
-    background: #222;
-    color: white;
-
-    font-size: 16px;
-    cursor: pointer;
+.ranking {
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 25px;
 }
 
-.restart-button:hover {
-    background: #444;
+.ranking-title {
+    font-size: 13px;
+    color: #777d88;
+    letter-spacing: 0.15em;
+    margin-bottom: 25px;
 }
 
-/* スマホ */
+.rank-row {
+    margin-bottom: 20px;
+}
 
-@media (max-width: 600px) {
+.rank-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
 
-    .container {
-        margin: 20px auto;
+.rank-name {
+    font-weight: 700;
+}
+
+.rank-score {
+    color: #9297a1;
+    font-size: 13px;
+}
+
+.score-background {
+    height: 8px;
+    background: #292c34;
+}
+
+.score-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.8s ease;
+}
+
+.score-bar.thumb {
+    background: var(--thumb);
+}
+
+.score-bar.index {
+    background: var(--index);
+}
+
+.score-bar.middle {
+    background: var(--middle);
+}
+
+.score-bar.ring {
+    background: var(--ring);
+}
+
+.score-bar.pinky {
+    background: var(--pinky);
+}
+
+/* ==================================================
+   レスポンシブ
+   ================================================== */
+
+@media (max-width: 650px) {
+
+    #app {
+        padding: 20px 12px;
     }
 
-    .card {
-        padding: 25px;
+    .question-card {
+        padding: 25px 18px;
     }
 
-    h1 {
-        font-size: 28px;
+    .answers {
+        grid-template-columns: 1fr;
     }
 
-    .question {
-        font-size: 19px;
+    .answer-button {
+        min-height: 65px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-align: left;
+        padding: 12px 18px;
+    }
+
+    .answer-number {
+        margin: 0;
+        width: 25px;
+    }
+
+    .question-text {
+        font-size: 20px;
     }
 }
