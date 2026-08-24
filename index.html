@@ -9,200 +9,806 @@
 
     <title>五本指診断</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Noto Sans JP",
+                "Yu Gothic",
+                sans-serif;
+
+            background: #f3f3f3;
+            color: #222;
+        }
+
+        .container {
+            width: min(700px, 90%);
+            margin: 60px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 36px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .progress {
+            text-align: center;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-button {
+            width: 100%;
+
+            padding: 16px 20px;
+
+            border: 2px solid #ddd;
+            border-radius: 12px;
+
+            background: white;
+            color: #222;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+        .answer-button:hover {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+
+        .start-button,
+        .restart-button {
+            display: block;
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #222;
+            color: white;
+
+            font-size: 18px;
+
+            cursor: pointer;
+        }
+
+        .start-button:hover,
+        .restart-button:hover {
+            background: #444;
+        }
+
+        .ranking {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+
+            padding: 18px 20px;
+
+            border-radius: 12px;
+
+            background: #f3f3f3;
+
+            font-size: 18px;
+        }
+
+        .ranking-item.first {
+            font-size: 22px;
+            font-weight: bold;
+            background: #e8e8e8;
+        }
+
+        .rank {
+            width: 60px;
+            font-weight: bold;
+        }
+
+        .finger-name {
+            flex: 1;
+        }
+
+        .score {
+            font-weight: bold;
+        }
+
+        .result-description {
+            margin-top: 30px;
+
+            padding: 20px;
+
+            background: #f5f5f5;
+
+            border-radius: 12px;
+
+            line-height: 1.8;
+        }
+
+        .restart-button {
+            margin-top: 30px;
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-    <main class="container">
 
-        <div class="card">
+<div class="container">
 
-            <!-- =========================
-                 最初の画面
-            ========================== -->
-
-            <section id="start">
-
-                <h1>五本指診断</h1>
-
-                <p class="subtitle">
-                    あなたはどの指に近い？
-                </p>
-
-                <button
-                    id="start-button"
-                    class="restart-button"
-                >
-                    診断をはじめる
-                </button>
-
-            </section>
+    <div class="card">
 
 
-            <!-- =========================
-                 質問画面
-            ========================== -->
+        <!-- =========================
+             スタート画面
+        ========================== -->
 
-            <section
-                id="quiz"
-                style="display: none;"
+        <section id="start">
+
+            <h1>
+                五本指診断
+            </h1>
+
+            <p class="subtitle">
+                あなたはどの指に近い？
+            </p>
+
+            <button
+                id="startButton"
+                class="start-button"
             >
+                診断をはじめる
+            </button>
 
-                <div
-                    id="progress"
-                    class="progress"
-                ></div>
-
-                <div
-                    id="question"
-                    class="question"
-                ></div>
-
-                <div
-                    id="answers"
-                    class="answers"
-                ></div>
-
-            </section>
+        </section>
 
 
-            <!-- =========================
-                 結果画面
-            ========================== -->
 
-            <section
-                id="result"
-                style="display: none;"
+        <!-- =========================
+             質問画面
+        ========================== -->
+
+        <section
+            id="quiz"
+            style="display: none;"
+        >
+
+            <div
+                id="progress"
+                class="progress"
+            ></div>
+
+            <div
+                id="question"
+                class="question"
+            ></div>
+
+            <div
+                id="answers"
+                class="answers"
+            ></div>
+
+        </section>
+
+
+
+        <!-- =========================
+             結果画面
+        ========================== -->
+
+        <section
+            id="result"
+            style="display: none;"
+        >
+
+            <h2>
+                あなたの五本指ランキング
+            </h2>
+
+            <div
+                id="ranking"
+                class="ranking"
+            ></div>
+
+            <div
+                id="description"
+                class="result-description"
+            ></div>
+
+            <button
+                id="restartButton"
+                class="restart-button"
             >
+                もう一度診断する
+            </button>
 
-                <h2 class="result-title">
-                    あなたの五本指ランキング
-                </h2>
-
-                <div
-                    id="ranking"
-                    class="ranking"
-                ></div>
-
-                <div
-                    id="description"
-                    class="result-description"
-                ></div>
-
-                <button
-                    id="restart"
-                    class="restart-button"
-                >
-                    もう一度診断する
-                </button>
-
-            </section>
-
-        </div>
-
-    </main>
+        </section>
 
 
-    <!-- =========================
-         質問データ
-    ========================== -->
+    </div>
 
-    <script src="questions.js"></script>
+</div>
 
 
-    <!-- =========================
-         診断システム
-    ========================== -->
 
-    <script>
+<script>
 
-        // ----------------------------------------
-        // 五本の指の情報
-        // ----------------------------------------
 
-        const fingers = {
+// ======================================================
+// 質問データ
+// ======================================================
+//
+// 今後、質問を増やしたり点数を変更したい場合は
+// 基本的にここだけ編集すればOKです。
+// ======================================================
 
-            thumb: {
-                name: "親指",
-                emoji: "👍",
-                description:
-                    "上下関係や礼儀を重んじる傾向があります。"
-            },
+const questions = [
 
-            index: {
-                name: "人差し指",
-                emoji: "☝️",
-                description:
-                    "規則や命令に従うことを重視する傾向があります。"
-            },
 
-            middle: {
-                name: "中指",
-                emoji: "🖕",
-                description:
-                    "義理や仲間意識を重視し、受けた仕打ちを忘れない傾向があります。"
-            },
+    {
+        text: "自分より立場が上の人には、それ相応の礼儀を払うべきだと思う。",
 
-            ring: {
-                name: "薬指",
-                emoji: "💍",
-                description:
-                    "芸術や独創性を重視し、面白いものを追い求める傾向があります。"
-            },
+        scores: {
+            thumb: 2,
+            index: 0,
+            middle: 0,
+            ring: 0,
+            little: 0
+        }
+    },
 
-            little: {
-                name: "小指",
-                emoji: "🤏",
-                description:
-                    "秘密や自由を重視し、自分の道を進む傾向があります。"
+
+    {
+        text: "決められたルールなら、納得できなくても従うべきだと思う。",
+
+        scores: {
+            thumb: 0,
+            index: 2,
+            middle: 0,
+            ring: 0,
+            little: -1
+        }
+    },
+
+
+    {
+        text: "自分や仲間が受けた仕打ちは、きちんと返すべきだと思う。",
+
+        scores: {
+            thumb: 0,
+            index: 0,
+            middle: 2,
+            ring: 0,
+            little: 0
+        }
+    },
+
+
+    {
+        text: "既存の常識に沿った作品より、独創的で変わった作品の方が魅力的だと思う。",
+
+        scores: {
+            thumb: 0,
+            index: 0,
+            middle: 0,
+            ring: 2,
+            little: 0
+        }
+    },
+
+
+    {
+        text: "自分のことを他人にあまり知られなくても構わないと思う。",
+
+        scores: {
+            thumb: 0,
+            index: 0,
+            middle: 0,
+            ring: 0,
+            little: 2
+        }
+    },
+
+
+    {
+        text: "立場や肩書きが違うなら、それに応じて接し方を変えるのは当然だと思う。",
+
+        scores: {
+            thumb: 2,
+            index: 0,
+            middle: 0,
+            ring: 0,
+            little: 0
+        }
+    },
+
+
+    {
+        text: "命令されたことに疑問を感じても、決められたことなら従う方がいいと思う。",
+
+        scores: {
+            thumb: 0,
+            index: 2,
+            middle: 0,
+            ring: 0,
+            little: -1
+        }
+    },
+
+
+    {
+        text: "自分が受けた小さな失礼でも、されたことはなかなか忘れない。",
+
+        scores: {
+            thumb: 0,
+            index: 0,
+            middle: 2,
+            ring: 0,
+            little: 0
+        }
+    },
+
+
+    {
+        text: "人との付き合いよりも、面白い作品やアイデアを追いかけている方が楽しい。",
+
+        scores: {
+            thumb: 0,
+            index: 0,
+            middle: 0,
+            ring: 2,
+            little: 1
+        }
+    },
+
+
+    {
+        text: "誰にも干渉されず、自分一人で自由に行動する方が気楽だ。",
+
+        scores: {
+            thumb: 0,
+            index: -1,
+            middle: 0,
+            ring: 0,
+            little: 2
+        }
+    }
+
+
+];
+
+
+
+// ======================================================
+// 五本指の情報
+// ======================================================
+
+const fingers = {
+
+
+    thumb: {
+        name: "親指",
+        description:
+            "上下関係や礼儀を重んじる傾向があります。"
+    },
+
+
+    index: {
+        name: "人差し指",
+        description:
+            "規則や命令に従うことを重視する傾向があります。"
+    },
+
+
+    middle: {
+        name: "中指",
+        description:
+            "義理や仲間意識を重視し、受けた仕打ちを忘れない傾向があります。"
+    },
+
+
+    ring: {
+        name: "薬指",
+        description:
+            "芸術や独創性を重視し、面白いものを追い求める傾向があります。"
+    },
+
+
+    little: {
+        name: "小指",
+        description:
+            "秘密や自由を重視し、自分の道を進む傾向があります。"
+    }
+
+};
+
+
+
+// ======================================================
+// 回答
+// ======================================================
+
+const answers = [
+
+    {
+        text: "強くそう思う",
+        value: 2
+    },
+
+    {
+        text: "それなりにそう思う",
+        value: 1
+    },
+
+    {
+        text: "わからない",
+        value: 0
+    },
+
+    {
+        text: "それなりに違う",
+        value: -1
+    },
+
+    {
+        text: "強く違う",
+        value: -2
+    }
+
+];
+
+
+
+// ======================================================
+// 現在の状態
+// ======================================================
+
+let currentQuestion = 0;
+
+
+let scores = {
+
+    thumb: 0,
+    index: 0,
+    middle: 0,
+    ring: 0,
+    little: 0
+
+};
+
+
+
+// ======================================================
+// HTMLを取得
+// ======================================================
+
+const start =
+    document.getElementById("start");
+
+const quiz =
+    document.getElementById("quiz");
+
+const result =
+    document.getElementById("result");
+
+const startButton =
+    document.getElementById("startButton");
+
+const question =
+    document.getElementById("question");
+
+const answersArea =
+    document.getElementById("answers");
+
+const progress =
+    document.getElementById("progress");
+
+const ranking =
+    document.getElementById("ranking");
+
+const description =
+    document.getElementById("description");
+
+const restartButton =
+    document.getElementById("restartButton");
+
+
+
+// ======================================================
+// 診断開始
+// ======================================================
+
+startButton.onclick = function() {
+
+
+    console.log("診断開始");
+
+
+    start.style.display = "none";
+
+    quiz.style.display = "block";
+
+    showQuestion();
+
+};
+
+
+
+// ======================================================
+// 質問表示
+// ======================================================
+
+function showQuestion() {
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    progress.textContent =
+        "Q" +
+        (currentQuestion + 1) +
+        " / " +
+        questions.length;
+
+
+    question.textContent =
+        q.text;
+
+
+    answersArea.innerHTML = "";
+
+
+
+    answers.forEach(
+        function(answer) {
+
+
+            const button =
+                document.createElement("button");
+
+
+            button.className =
+                "answer-button";
+
+
+            button.textContent =
+                answer.text;
+
+
+            button.onclick =
+                function() {
+
+                    selectAnswer(answer.value);
+
+                };
+
+
+            answersArea.appendChild(button);
+
+
+        }
+    );
+
+}
+
+
+
+// ======================================================
+// 回答処理
+// ======================================================
+
+function selectAnswer(value) {
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    scores.thumb +=
+        q.scores.thumb * value;
+
+
+    scores.index +=
+        q.scores.index * value;
+
+
+    scores.middle +=
+        q.scores.middle * value;
+
+
+    scores.ring +=
+        q.scores.ring * value;
+
+
+    scores.little +=
+        q.scores.little * value;
+
+
+
+    currentQuestion++;
+
+
+
+    if (
+        currentQuestion >= questions.length
+    ) {
+
+        showResult();
+
+    }
+    else {
+
+        showQuestion();
+
+    }
+
+}
+
+
+
+// ======================================================
+// 結果表示
+// ======================================================
+
+function showResult() {
+
+
+    quiz.style.display =
+        "none";
+
+
+    result.style.display =
+        "block";
+
+
+
+    const sorted =
+        Object.entries(scores)
+            .sort(
+                function(a, b) {
+
+                    return b[1] - a[1];
+
+                }
+            );
+
+
+
+    ranking.innerHTML = "";
+
+
+
+    sorted.forEach(
+        function(item, index) {
+
+
+            const key =
+                item[0];
+
+
+            const score =
+                item[1];
+
+
+            const finger =
+                fingers[key];
+
+
+            const div =
+                document.createElement("div");
+
+
+            div.className =
+                "ranking-item";
+
+
+            if (index === 0) {
+
+                div.classList.add("first");
+
             }
 
-        };
+
+            div.innerHTML =
+
+                "<span class='rank'>" +
+                (index + 1) +
+                "位</span>" +
+
+                "<span class='finger-name'>" +
+                finger.name +
+                "</span>" +
+
+                "<span class='score'>" +
+                score +
+                "点</span>";
 
 
-        // ----------------------------------------
-        // 回答の強さ
-        // ----------------------------------------
-
-        const answerValues = [
-
-            {
-                text: "強くそう思う",
-                value: 2
-            },
-
-            {
-                text: "それなりにそう思う",
-                value: 1
-            },
-
-            {
-                text: "わからない",
-                value: 0
-            },
-
-            {
-                text: "それなりに違う",
-                value: -1
-            },
-
-            {
-                text: "強く違う",
-                value: -2
-            }
-
-        ];
+            ranking.appendChild(div);
 
 
-        // ----------------------------------------
-        // 現在の状態
-        // ----------------------------------------
+        }
+    );
 
-        let currentQuestion = 0;
 
-        let scores = {
+
+    const first =
+        fingers[sorted[0][0]];
+
+
+    description.innerHTML =
+
+        "<strong>あなたは「" +
+        first.name +
+        "」タイプ！</strong>" +
+
+        "<br><br>" +
+
+        first.description;
+
+}
+
+
+
+// ======================================================
+// やり直す
+// ======================================================
+
+restartButton.onclick =
+    function() {
+
+
+        currentQuestion = 0;
+
+
+        scores = {
 
             thumb: 0,
             index: 0,
@@ -213,316 +819,18 @@
         };
 
 
-        // ----------------------------------------
-        // HTMLの部品を取得
-        // ----------------------------------------
+        result.style.display =
+            "none";
 
-        const startElement =
-            document.getElementById("start");
 
-        const startButton =
-            document.getElementById("start-button");
+        start.style.display =
+            "block";
 
-        const quizElement =
-            document.getElementById("quiz");
+    };
 
-        const resultElement =
-            document.getElementById("result");
 
-        const questionElement =
-            document.getElementById("question");
+</script>
 
-        const answersElement =
-            document.getElementById("answers");
-
-        const progressElement =
-            document.getElementById("progress");
-
-        const rankingElement =
-            document.getElementById("ranking");
-
-        const descriptionElement =
-            document.getElementById("description");
-
-        const restartButton =
-            document.getElementById("restart");
-
-
-        // ========================================
-        // 「診断をはじめる」を押したとき
-        // ========================================
-
-        startButton.addEventListener(
-            "click",
-            function() {
-
-                startElement.style.display = "none";
-
-                quizElement.style.display = "block";
-
-                showQuestion();
-
-            }
-        );
-
-
-        // ========================================
-        // 質問を表示する
-        // ========================================
-
-        function showQuestion() {
-
-            const question =
-                questions[currentQuestion];
-
-
-            // 何問目か表示
-
-            progressElement.textContent =
-                "Q" +
-                (currentQuestion + 1) +
-                " / " +
-                questions.length;
-
-
-            // 質問文
-
-            questionElement.textContent =
-                question.text;
-
-
-            // 前のボタンを消す
-
-            answersElement.innerHTML = "";
-
-
-            // 5つの回答ボタンを作る
-
-            answerValues.forEach(
-                function(answer) {
-
-                    const button =
-                        document.createElement("button");
-
-
-                    button.className =
-                        "answer-button";
-
-
-                    button.textContent =
-                        answer.text;
-
-
-                    button.addEventListener(
-                        "click",
-                        function() {
-
-                            selectAnswer(answer.value);
-
-                        }
-                    );
-
-
-                    answersElement.appendChild(button);
-
-                }
-            );
-
-        }
-
-
-        // ========================================
-        // 回答されたとき
-        // ========================================
-
-        function selectAnswer(value) {
-
-            const question =
-                questions[currentQuestion];
-
-
-            // 各指に点数を加える
-
-            scores.thumb +=
-                question.scores.thumb * value;
-
-            scores.index +=
-                question.scores.index * value;
-
-            scores.middle +=
-                question.scores.middle * value;
-
-            scores.ring +=
-                question.scores.ring * value;
-
-            scores.little +=
-                question.scores.little * value;
-
-
-            // 次の問題へ
-
-            currentQuestion++;
-
-
-            // 全問終了した？
-
-            if (
-                currentQuestion >= questions.length
-            ) {
-
-                showResult();
-
-            }
-            else {
-
-                showQuestion();
-
-            }
-
-        }
-
-
-        // ========================================
-        // 結果を表示
-        // ========================================
-
-        function showResult() {
-
-            quizElement.style.display =
-                "none";
-
-            resultElement.style.display =
-                "block";
-
-
-            // 点数の高い順に並べる
-
-            const ranking =
-                Object.entries(scores)
-                    .sort(
-                        function(a, b) {
-
-                            return b[1] - a[1];
-
-                        }
-                    );
-
-
-            rankingElement.innerHTML = "";
-
-
-            // ランキングを作る
-
-            ranking.forEach(
-                function(item, index) {
-
-                    const fingerKey =
-                        item[0];
-
-                    const score =
-                        item[1];
-
-                    const finger =
-                        fingers[fingerKey];
-
-
-                    const rankingItem =
-                        document.createElement("div");
-
-
-                    rankingItem.className =
-                        "ranking-item";
-
-
-                    if (index === 0) {
-
-                        rankingItem.classList.add("first");
-
-                    }
-
-
-                    rankingItem.innerHTML = `
-
-                        <span class="rank">
-                            ${index + 1}位
-                        </span>
-
-                        <span class="finger-name">
-                            ${finger.emoji}
-                            ${finger.name}
-                        </span>
-
-                        <span class="score">
-                            ${score}点
-                        </span>
-
-                    `;
-
-
-                    rankingElement.appendChild(
-                        rankingItem
-                    );
-
-                }
-            );
-
-
-            // 1位の説明
-
-            const firstFingerKey =
-                ranking[0][0];
-
-            const firstFinger =
-                fingers[firstFingerKey];
-
-
-            descriptionElement.innerHTML = `
-
-                <strong>
-                    あなたは「${firstFinger.name}」タイプ！
-                </strong>
-
-                <br><br>
-
-                ${firstFinger.description}
-
-            `;
-
-        }
-
-
-        // ========================================
-        // もう一度診断
-        // ========================================
-
-        restartButton.addEventListener(
-            "click",
-            function() {
-
-                currentQuestion = 0;
-
-
-                scores = {
-
-                    thumb: 0,
-                    index: 0,
-                    middle: 0,
-                    ring: 0,
-                    little: 0
-
-                };
-
-
-                resultElement.style.display =
-                    "none";
-
-                startElement.style.display =
-                    "block";
-
-            }
-        );
-
-    </script>
 
 </body>
 
