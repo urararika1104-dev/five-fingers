@@ -4,9 +4,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 
+
+/* ==================================================
+   カラー
+================================================== */
+
 :root {
     --bg: #08090d;
     --bg2: #10121a;
+
     --panel: rgba(20, 22, 30, 0.92);
     --panel2: rgba(28, 31, 42, 0.9);
 
@@ -15,6 +21,7 @@
     --border: rgba(255,255,255,0.12);
 
     /* 五本指 */
+
     --thumb: #e53935;
     --index: #55d9ff;
     --middle: #a66cff;
@@ -22,9 +29,10 @@
     --pinky: #4d7cff;
 }
 
-/* ------------------------------
+
+/* ==================================================
    基本
------------------------------- */
+================================================== */
 
 * {
     box-sizing: border-box;
@@ -56,11 +64,16 @@ body {
     overflow-x: hidden;
 }
 
-/* 五本指の光 */
+
+/* ==================================================
+   五本指の光
+================================================== */
 
 body::before {
     content: "";
+
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
@@ -71,6 +84,7 @@ body::before {
             rgba(229,57,53,0.08),
             transparent 28%
         ),
+
         radial-gradient(
             circle at 85% 50%,
             rgba(77,124,255,0.08),
@@ -80,16 +94,20 @@ body::before {
     z-index: -1;
 }
 
-/* ------------------------------
+
+/* ==================================================
    全体
------------------------------- */
+================================================== */
 
 #app {
     width: 100%;
+
     min-height: 100vh;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     padding: 35px 20px;
@@ -99,9 +117,10 @@ body::before {
     width: min(900px, 100%);
 }
 
-/* ------------------------------
+
+/* ==================================================
    タイトル画面
------------------------------- */
+================================================== */
 
 .title-screen {
     text-align: center;
@@ -111,6 +130,7 @@ body::before {
     color: var(--muted);
 
     font-size: 12px;
+
     font-weight: 700;
 
     letter-spacing: 0.35em;
@@ -122,6 +142,7 @@ body::before {
     margin: 0;
 
     font-size: clamp(48px, 9vw, 90px);
+
     font-weight: 900;
 
     letter-spacing: 0.08em;
@@ -137,12 +158,16 @@ body::before {
         );
 
     -webkit-background-clip: text;
+
     background-clip: text;
 
     color: transparent;
 
     filter:
-        drop-shadow(0 0 25px rgba(255,255,255,0.08));
+        drop-shadow(
+            0 0 25px
+            rgba(255,255,255,0.08)
+        );
 }
 
 .subtitle {
@@ -151,15 +176,20 @@ body::before {
     color: #aeb2bd;
 
     font-size: 16px;
+
     letter-spacing: 0.15em;
 }
 
-/* 五色ライン */
+
+/* ==================================================
+   五色ライン
+================================================== */
 
 .finger-line {
     display: flex;
 
     width: min(600px, 90%);
+
     height: 5px;
 
     margin: 45px auto;
@@ -169,7 +199,8 @@ body::before {
     overflow: hidden;
 
     box-shadow:
-        0 0 25px rgba(255,255,255,0.08);
+        0 0 25px
+        rgba(255,255,255,0.08);
 }
 
 .finger-line span {
@@ -196,19 +227,27 @@ body::before {
     background: var(--pinky);
 }
 
-/* ------------------------------
+
+/* ==================================================
    共通ボタン
------------------------------- */
+================================================== */
 
 button {
     font-family: inherit;
 }
 
+
+/* ==================================================
+   開始・結果ボタン
+================================================== */
+
 .start-button,
 .next-button,
 .retry-button {
 
-    border: 1px solid rgba(255,255,255,0.22);
+    border:
+        1px solid
+        rgba(255,255,255,0.22);
 
     background:
         linear-gradient(
@@ -222,6 +261,7 @@ button {
     padding: 17px 48px;
 
     font-size: 15px;
+
     font-weight: 700;
 
     letter-spacing: 0.12em;
@@ -249,28 +289,34 @@ button {
         rgba(166,108,255,0.12);
 
     box-shadow:
-        0 10px 35px rgba(166,108,255,0.15);
+        0 10px 35px
+        rgba(166,108,255,0.15);
 }
 
 .start-button:active,
 .next-button:active,
 .retry-button:active {
+
     transform: translateY(0);
 }
 
-/* ------------------------------
+
+/* ==================================================
    質問画面
------------------------------- */
+================================================== */
 
 .question-header {
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     color: var(--muted);
 
     font-size: 12px;
+
     font-weight: 700;
 
     letter-spacing: 0.18em;
@@ -278,11 +324,17 @@ button {
     margin-bottom: 12px;
 }
 
+
+/* ==================================================
+   プログレスバー
+================================================== */
+
 .progress-container {
 
     height: 4px;
 
-    background: rgba(255,255,255,0.08);
+    background:
+        rgba(255,255,255,0.08);
 
     border-radius: 999px;
 
@@ -311,9 +363,10 @@ button {
         width 0.4s ease;
 }
 
-/* ------------------------------
+
+/* ==================================================
    質問カード
------------------------------- */
+================================================== */
 
 .question-card {
 
@@ -335,14 +388,18 @@ button {
         clamp(30px, 6vw, 65px);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,0.4);
+        0 30px 90px
+        rgba(0,0,0,0.4);
 
     backdrop-filter: blur(10px);
 
     overflow: hidden;
 }
 
-/* カード上部の五色ライン */
+
+/* ==================================================
+   質問カード上部の五色ライン
+================================================== */
 
 .question-card::before {
 
@@ -351,7 +408,9 @@ button {
     position: absolute;
 
     top: 0;
+
     left: 0;
+
     right: 0;
 
     height: 3px;
@@ -367,11 +426,13 @@ button {
         );
 }
 
+
 .question-number {
 
     color: #777d89;
 
     font-size: 11px;
+
     font-weight: 700;
 
     letter-spacing: 0.25em;
@@ -379,9 +440,11 @@ button {
     margin-bottom: 22px;
 }
 
+
 .question-text {
 
-    margin: 0 0 45px;
+    margin:
+        0 0 45px;
 
     font-size:
         clamp(21px, 4vw, 31px);
@@ -393,9 +456,10 @@ button {
     letter-spacing: 0.02em;
 }
 
-/* ------------------------------
+
+/* ==================================================
    回答ボタン
------------------------------- */
+================================================== */
 
 .answers {
 
@@ -407,6 +471,7 @@ button {
     gap: 10px;
 }
 
+
 .answer-button {
 
     position: relative;
@@ -414,7 +479,8 @@ button {
     min-height: 115px;
 
     border:
-        1px solid rgba(255,255,255,0.12);
+        1px solid
+        rgba(255,255,255,0.12);
 
     border-radius: 12px;
 
@@ -448,20 +514,24 @@ button {
         rgba(166,108,255,0.65);
 
     box-shadow:
-        0 12px 30px rgba(166,108,255,0.12);
+        0 12px 30px
+        rgba(166,108,255,0.12);
 }
+
 
 .answer-number {
 
     display: block;
 
     font-size: 24px;
+
     font-weight: 900;
 
     margin-bottom: 10px;
 
     color: #ffffff;
 }
+
 
 .answer-label {
 
@@ -472,52 +542,162 @@ button {
     line-height: 1.5;
 }
 
-/* 5段階回答それぞれに色を付ける */
+
+/* ==================================================
+   回答ボタンの5色
+================================================== */
 
 .answer-button:nth-child(1):hover {
-    border-color: var(--thumb);
-    background: rgba(229,57,53,0.12);
+
+    border-color:
+        var(--thumb);
+
+    background:
+        rgba(229,57,53,0.12);
 }
 
 .answer-button:nth-child(2):hover {
-    border-color: var(--index);
-    background: rgba(85,217,255,0.10);
+
+    border-color:
+        var(--index);
+
+    background:
+        rgba(85,217,255,0.10);
 }
 
 .answer-button:nth-child(3):hover {
-    border-color: var(--middle);
-    background: rgba(166,108,255,0.12);
+
+    border-color:
+        var(--middle);
+
+    background:
+        rgba(166,108,255,0.12);
 }
 
 .answer-button:nth-child(4):hover {
-    border-color: var(--ring);
-    background: rgba(255,157,69,0.12);
+
+    border-color:
+        var(--ring);
+
+    background:
+        rgba(255,157,69,0.12);
 }
 
 .answer-button:nth-child(5):hover {
-    border-color: var(--pinky);
-    background: rgba(77,124,255,0.12);
+
+    border-color:
+        var(--pinky);
+
+    background:
+        rgba(77,124,255,0.12);
 }
 
-/* ------------------------------
+
+/* ==================================================
+   ★ 前の質問へ戻るボタン
+================================================== */
+
+.back-button {
+
+    display: block;
+
+    width: fit-content;
+
+    min-width: 190px;
+
+    margin:
+        28px auto 0;
+
+    padding:
+        11px 24px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+    border-radius: 8px;
+
+    color:
+        #b8bbc4;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* マウスを乗せたとき */
+
+.back-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(166,108,255,0.10);
+
+    border-color:
+        rgba(166,108,255,0.65);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 8px 25px
+        rgba(166,108,255,0.12);
+}
+
+
+/* 押しているとき */
+
+.back-button:active {
+
+    transform:
+        translateY(0);
+
+    background:
+        rgba(166,108,255,0.16);
+}
+
+
+/* ==================================================
    結果画面
------------------------------- */
+================================================== */
 
 .result-screen {
     text-align: center;
 }
+
 
 .result-label {
 
     color: var(--muted);
 
     font-size: 12px;
+
     font-weight: 700;
 
     letter-spacing: 0.35em;
 
     margin-bottom: 15px;
 }
+
 
 .result-finger {
 
@@ -534,6 +714,7 @@ button {
         0 0 35px currentColor;
 }
 
+
 .result-subtitle {
 
     color: #9ca1ad;
@@ -544,6 +725,7 @@ button {
 
     letter-spacing: 0.3em;
 }
+
 
 .result-description {
 
@@ -559,9 +741,10 @@ button {
     font-size: 15px;
 }
 
-/* ------------------------------
+
+/* ==================================================
    ランキング
------------------------------- */
+================================================== */
 
 .ranking {
 
@@ -578,14 +761,17 @@ button {
     padding: 28px;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,0.3);
+        0 20px 60px
+        rgba(0,0,0,0.3);
 }
+
 
 .ranking-title {
 
     color: #777d88;
 
     font-size: 11px;
+
     font-weight: 700;
 
     letter-spacing: 0.2em;
@@ -593,25 +779,30 @@ button {
     margin-bottom: 28px;
 }
 
+
 .rank-row {
 
     margin-bottom: 22px;
 }
+
 
 .rank-info {
 
     display: flex;
 
     justify-content: space-between;
+
     align-items: center;
 
     margin-bottom: 8px;
 }
 
+
 .rank-name {
 
     font-weight: 700;
 }
+
 
 .rank-score {
 
@@ -619,6 +810,7 @@ button {
 
     font-size: 12px;
 }
+
 
 .score-background {
 
@@ -632,6 +824,7 @@ button {
     overflow: hidden;
 }
 
+
 .score-bar {
 
     height: 100%;
@@ -642,118 +835,166 @@ button {
         width 0.8s ease;
 }
 
+
 .score-bar.thumb {
-    background: var(--thumb);
-    box-shadow: 0 0 12px rgba(229,57,53,0.5);
+
+    background:
+        var(--thumb);
+
+    box-shadow:
+        0 0 12px
+        rgba(229,57,53,0.5);
 }
+
 
 .score-bar.index {
-    background: var(--index);
-    box-shadow: 0 0 12px rgba(85,217,255,0.5);
+
+    background:
+        var(--index);
+
+    box-shadow:
+        0 0 12px
+        rgba(85,217,255,0.5);
 }
+
 
 .score-bar.middle {
-    background: var(--middle);
-    box-shadow: 0 0 12px rgba(166,108,255,0.5);
+
+    background:
+        var(--middle);
+
+    box-shadow:
+        0 0 12px
+        rgba(166,108,255,0.5);
 }
+
 
 .score-bar.ring {
-    background: var(--ring);
-    box-shadow: 0 0 12px rgba(255,157,69,0.5);
+
+    background:
+        var(--ring);
+
+    box-shadow:
+        0 0 12px
+        rgba(255,157,69,0.5);
 }
+
 
 .score-bar.pinky {
-    background: var(--pinky);
-    box-shadow: 0 0 12px rgba(77,124,255,0.5);
+
+    background:
+        var(--pinky);
+
+    box-shadow:
+        0 0 12px
+        rgba(77,124,255,0.5);
 }
 
-/* ------------------------------
+
+/* ==================================================
    スマホ対応
------------------------------- */
+================================================== */
 
 @media (max-width: 700px) {
 
     #app {
-        padding: 20px 12px;
+
+        padding:
+            20px 12px;
     }
 
+
     .question-card {
-        padding: 30px 20px;
-        border-radius: 15px;
+
+        padding:
+            30px 20px;
+
+        border-radius:
+            15px;
     }
+
 
     .answers {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        gap: 8px;
+        gap:
+            8px;
     }
+
 
     .answer-button {
 
-        min-height: 65px;
+        min-height:
+            65px;
 
-        display: flex;
+        display:
+            flex;
 
-        align-items: center;
+        align-items:
+            center;
 
-        gap: 15px;
+        gap:
+            15px;
 
-        text-align: left;
+        text-align:
+            left;
 
-        padding: 12px 18px;
+        padding:
+            12px 18px;
     }
+
 
     .answer-number {
 
-        width: 28px;
+        width:
+            28px;
 
-        margin: 0;
+        margin:
+            0;
 
-        flex-shrink: 0;
+        flex-shrink:
+            0;
     }
+
 
     .answer-label {
-        font-size: 13px;
+
+        font-size:
+            13px;
     }
+
 
     .question-text {
-        font-size: 20px;
+
+        font-size:
+            20px;
     }
+
 
     .ranking {
-        padding: 20px;
+
+        padding:
+            20px;
     }
-}
-/* =========================================
-   前の質問へ戻るボタン
-========================================= */
 
-.back-button {
-    display: block;
-    margin: 24px auto 0;
 
-    padding: 12px 24px;
+    /* スマホでは戻るボタンを少し大きく */
 
-    background: transparent;
+    .back-button {
 
-    border: 1px solid #999;
-    border-radius: 8px;
+        width:
+            100%;
 
-    color: #555;
+        min-width:
+            0;
 
-    font-size: 14px;
+        padding:
+            13px 20px;
 
-    cursor: pointer;
+        margin-top:
+            20px;
+    }
 
-    transition:
-        background 0.2s,
-        color 0.2s,
-        border-color 0.2s;
-}
-
-.back-button:hover {
-    background: #eeeeee;
-    border-color: #555;
-    color: #111;
 }
