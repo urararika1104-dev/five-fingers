@@ -23,9 +23,9 @@ const questions = [
         weights: {
             thumb: 3,
             index: 0,
-            middle: -1,
-            ring: 0,
-            pinky: 0
+            middle: -3,
+            ring: -1,
+            pinky: -2
         }
     },
 
@@ -34,7 +34,7 @@ const questions = [
         weights: {
             thumb: 3,
             index: 1,
-            middle: 0,
+            middle: -1,
             ring: 0,
             pinky: -1
         }
@@ -45,8 +45,8 @@ const questions = [
         weights: {
             thumb: 0,
             index: 3,
-            middle: -1,
-            ring: -1,
+            middle: -2,
+            ring: -2,
             pinky: -1
         }
     },
@@ -56,20 +56,20 @@ const questions = [
         weights: {
             thumb: 0,
             index: 3,
-            middle: 0,
+            middle: 1,
             ring: -1,
             pinky: -1
         }
     },
 
     {
-        text: "一度受けた恩や義理は、できるだけ忘れないようにしている。",
+        text: "もし仲間が殴られたりしても相手が上の立場なら逆らえない",
         weights: {
-            thumb: 0,
-            index: 0,
-            middle: 3,
+            thumb: 3,
+            index: 1,
+            middle: -3,
             ring: 0,
-            pinky: 0
+            pinky: -1
         }
     },
 
@@ -85,24 +85,24 @@ const questions = [
     },
 
     {
-        text: "仲間内での結束や身内意識はかなり大切だと思う。",
+        text: "もし相手が自分より人気だったり有名人でも、対等に接せれる。",
         weights: {
-            thumb: 0,
+            thumb: -2,
             index: 0,
-            middle: 3,
-            ring: -1,
-            pinky: 0
+            middle: 2,
+            ring: 1,
+            pinky: 2
         }
     },
 
     {
-        text: "作品や創作物を見るとき、技術よりも「センスがあるか」を重視する。",
+        text: "多少理不尽であっても、やらなきゃいけないことはあると思う。",
         weights: {
-            thumb: 0,
-            index: -1,
-            middle: 0,
-            ring: 3,
-            pinky: 0
+            thumb: 2,
+            index: 3,
+            middle: -3,
+            ring: -1,
+            pinky: 1
         }
     },
 
@@ -118,10 +118,10 @@ const questions = [
     },
 
     {
-        text: "「面白そう」「興味深い」と感じるものには、かなり強く惹かれる。",
+        text: "成功の是非に関わらず、新しいことには挑戦してみたいものだ",
         weights: {
             thumb: 0,
-            index: 0,
+            index: -1,
             middle: 0,
             ring: 3,
             pinky: 1
@@ -132,9 +132,9 @@ const questions = [
         text: "自分のことを他人にあまり知られたくない。",
         weights: {
             thumb: 0,
-            index: 0,
+            index: 1,
             middle: 0,
-            ring: 0,
+            ring: -1,
             pinky: 3
         }
     },
@@ -155,7 +155,7 @@ const questions = [
         weights: {
             thumb: -1,
             index: -1,
-            middle: -1,
+            middle: -3,
             ring: 1,
             pinky: 3
         }
@@ -175,10 +175,10 @@ const questions = [
     {
         text: "誰かに命令されるより、自分で考えて自由に行動したい。",
         weights: {
-            thumb: -1,
+            thumb: -2,
             index: -2,
-            middle: 0,
-            ring: 1,
+            middle: 1,
+            ring: 2,
             pinky: 3
         }
     },
@@ -188,7 +188,7 @@ const questions = [
         weights: {
             thumb: -2,
             index: 0,
-            middle: 1,
+            middle: 3,
             ring: 1,
             pinky: 1
         }
@@ -201,7 +201,7 @@ const questions = [
             index: 1,
             middle: -3,
             ring: 0,
-            pinky: 0
+            pinky: 1
         }
     },
 
@@ -212,15 +212,15 @@ const questions = [
             index: 0,
             middle: 3,
             ring: 0,
-            pinky: 0
+            pinky: -2
         }
     },
 
     {
-        text: "作品に込められた意味より、「見ていて面白いか・惹きつけられるか」を重視する。",
+        text: "課題で何かを作れと言われたら、少し奇をてらいたくなってしまう",
         weights: {
-            thumb: 0,
-            index: 0,
+            thumb: -1,
+            index: -2,
             middle: 0,
             ring: 3,
             pinky: 1
