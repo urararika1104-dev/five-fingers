@@ -12,6 +12,9 @@ let scores = {
     pinky: 0
 };
 
+// 回答履歴
+let answerHistory = [];
+
 
 // -----------------------------------------------
 // 指の情報
@@ -95,7 +98,7 @@ const answers = [
 
 
 // -----------------------------------------------
-// 画面表示
+// 最初の画面
 // -----------------------------------------------
 
 function showTitle() {
@@ -153,6 +156,9 @@ function startDiagnosis() {
         pinky: 0
     };
 
+    // 回答履歴もリセット
+    answerHistory = [];
+
     showQuestion();
 }
 
@@ -192,6 +198,28 @@ function showQuestion() {
         `;
 
     });
+
+
+    // -----------------------------------------------
+    // 戻るボタン
+    // -----------------------------------------------
+
+    let backButtonHTML = "";
+
+    if (currentQuestion > 0) {
+
+        backButtonHTML = `
+
+            <button
+                class="back-button"
+                onclick="goBack()"
+            >
+                ← 前の質問へ戻る
+            </button>
+
+        `;
+
+    }
 
 
     document.getElementById("app").innerHTML = `
@@ -238,6 +266,8 @@ function showQuestion() {
                     ${answerHTML}
                 </div>
 
+                ${backButtonHTML}
+
             </div>
 
         </div>
@@ -253,6 +283,36 @@ function showQuestion() {
 function answerQuestion(value) {
 
     const question = questions[currentQuestion];
+
+
+    // -----------------------------------------------
+    // もし既にこの質問に回答していた場合
+    // 以前の回答を取り消す
+    // -----------------------------------------------
+
+    if (answerHistory[currentQuestion] !== undefined) {
+
+        const oldValue = answerHistory[currentQuestion];
+
+        scores.thumb -= oldValue * question.weights.thumb;
+        scores.index -= oldValue * question.weights.index;
+        scores.middle -= oldValue * question.weights.middle;
+        scores.ring -= oldValue * question.weights.ring;
+        scores.pinky -= oldValue * question.weights.pinky;
+
+    }
+
+
+    // -----------------------------------------------
+    // 新しい回答を記録
+    // -----------------------------------------------
+
+    answerHistory[currentQuestion] = value;
+
+
+    // -----------------------------------------------
+    // 点数を加算
+    // -----------------------------------------------
 
     scores.thumb += value * question.weights.thumb;
     scores.index += value * question.weights.index;
@@ -273,6 +333,53 @@ function answerQuestion(value) {
         showQuestion();
 
     }
+
+}
+
+
+// -----------------------------------------------
+// 前の質問へ戻る
+// -----------------------------------------------
+
+function goBack() {
+
+    // 最初の質問なら戻れない
+    if (currentQuestion <= 0) {
+        return;
+    }
+
+
+    // 現在位置を一つ前へ
+    currentQuestion--;
+
+
+    const question = questions[currentQuestion];
+
+    // 前の質問で選んでいた回答
+    const oldValue = answerHistory[currentQuestion];
+
+
+    // -----------------------------------------------
+    // その質問で加算された点数を取り消す
+    // -----------------------------------------------
+
+    if (oldValue !== undefined) {
+
+        scores.thumb -= oldValue * question.weights.thumb;
+        scores.index -= oldValue * question.weights.index;
+        scores.middle -= oldValue * question.weights.middle;
+        scores.ring -= oldValue * question.weights.ring;
+        scores.pinky -= oldValue * question.weights.pinky;
+
+    }
+
+
+    // 回答履歴から削除
+    answerHistory[currentQuestion] = undefined;
+
+
+    // 質問を表示
+    showQuestion();
 
 }
 
@@ -303,15 +410,15 @@ function showResult() {
 
         const info = fingerInfo[finger];
 
-        // グラフ表示用
-        // 0以下の場合でも少しだけ表示
         let percentage = 0;
 
         if (maxScore > 0) {
+
             percentage = Math.max(
                 4,
                 (score / maxScore) * 100
             );
+
         }
 
 
@@ -397,11 +504,12 @@ function showResult() {
         </div>
 
     `;
+
 }
 
 
 // -----------------------------------------------
-// 最初の画面
+// 最初の画面を表示
 // -----------------------------------------------
 
 showTitle();
