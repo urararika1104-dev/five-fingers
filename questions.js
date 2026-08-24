@@ -52,11 +52,11 @@ const questions = [
     },
 
     {
-        text: "「決まりだから」という理由だけであっても、それを守ることには意味があると思う。",
+        text: "もし仲間や自分が傷ついてもそれが何かの命令なら逆らってはいけないと思う",
         weights: {
-            thumb: 0,
+            thumb: 1,
             index: 3,
-            middle: 1,
+            middle: -3,
             ring: -1,
             pinky: -1
         }
@@ -143,7 +143,7 @@ const questions = [
         text: "秘密を抱えていても、それを人に悟られない自信がある。",
         weights: {
             thumb: 0,
-            index: -1,
+            index: 2,
             middle: 0,
             ring: 0,
             pinky: 3
@@ -154,7 +154,7 @@ const questions = [
         text: "集団に所属していても、必要以上に他人と関わりたくない。",
         weights: {
             thumb: -1,
-            index: -1,
+            index: 2,
             middle: -3,
             ring: 1,
             pinky: 3
@@ -168,7 +168,7 @@ const questions = [
             index: -2,
             middle: 0,
             ring: 1,
-            pinky: 3
+            pinky: 2
         }
     },
 
@@ -187,7 +187,7 @@ const questions = [
         text: "目上の人であっても、礼儀さえ守っていれば対等に接していいと思う。",
         weights: {
             thumb: -2,
-            index: 0,
+            index: -1,
             middle: 3,
             ring: 1,
             pinky: 1
@@ -197,10 +197,10 @@ const questions = [
     {
         text: "自分が嫌な思いをしたとしても、相手に同じことをするのは避けたい。",
         weights: {
-            thumb: 0,
+            thumb: 1,
             index: 1,
             middle: -3,
-            ring: 0,
+            ring: -1,
             pinky: 1
         }
     },
@@ -209,10 +209,10 @@ const questions = [
         text: "仲間のためなら、自分が多少損をしてでも行動することがある。",
         weights: {
             thumb: 0,
-            index: 0,
+            index: -1,
             middle: 3,
             ring: 0,
-            pinky: -2
+            pinky: -3
         }
     },
 
@@ -220,10 +220,10 @@ const questions = [
         text: "課題で何かを作れと言われたら、少し奇をてらいたくなってしまう",
         weights: {
             thumb: -1,
-            index: -2,
+            index: -3,
             middle: 0,
             ring: 3,
-            pinky: 1
+            pinky: 2
         }
     },
 
@@ -231,9 +231,9 @@ const questions = [
         text: "誰にも知られていない情報や秘密を知ることにワクワクする。",
         weights: {
             thumb: 0,
-            index: 0,
+            index: -1,
             middle: 0,
-            ring: 1,
+            ring: 2,
             pinky: 3
         }
     }
