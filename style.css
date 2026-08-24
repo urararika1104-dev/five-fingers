@@ -1,110 +1,130 @@
 /* ==================================================
-   五本指診断 - デザイン
+   五本指診断 - Five Fingers Design
    ================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 
 :root {
-    --bg: #08090c;
-    --bg-light: #111318;
-    --panel: #15171d;
-    --panel-light: #1c1f27;
-    --text: #eeeeee;
-    --text-muted: #8f949f;
-    --border: #30343d;
+    --bg: #08090d;
+    --bg2: #10121a;
+    --panel: rgba(20, 22, 30, 0.92);
+    --panel2: rgba(28, 31, 42, 0.9);
 
-    --thumb: #d93636;
-    --index: #58d9ff;
+    --text: #f2f2f5;
+    --muted: #9297a5;
+    --border: rgba(255,255,255,0.12);
+
+    /* 五本指 */
+    --thumb: #e53935;
+    --index: #55d9ff;
     --middle: #a66cff;
     --ring: #ff9d45;
     --pinky: #4d7cff;
 }
 
+/* ------------------------------
+   基本
+------------------------------ */
+
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
+html {
     min-height: 100%;
 }
 
 body {
-    background:
-        radial-gradient(
-            circle at 50% -20%,
-            #292d38 0%,
-            #111319 35%,
-            var(--bg) 75%
-        );
+    margin: 0;
+    min-height: 100vh;
 
     color: var(--text);
+
     font-family:
         "Noto Sans JP",
         "Yu Gothic",
         sans-serif;
 
-    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 50% -15%,
+            #252936 0%,
+            #11131b 35%,
+            #08090d 75%
+        );
+
+    overflow-x: hidden;
 }
 
-/* 背景の5色 */
+/* 五本指の光 */
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
 
+    pointer-events: none;
+
     background:
-        linear-gradient(
-            90deg,
-            rgba(217,54,54,0.035),
-            transparent 20%,
-            transparent 80%,
-            rgba(77,124,255,0.035)
+        radial-gradient(
+            circle at 15% 50%,
+            rgba(229,57,53,0.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(77,124,255,0.08),
+            transparent 28%
         );
 
-    pointer-events: none;
+    z-index: -1;
 }
 
-/* 全体 */
+/* ------------------------------
+   全体
+------------------------------ */
 
 #app {
     width: 100%;
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 20px;
-}
 
-/* 画面 */
+    padding: 35px 20px;
+}
 
 .screen {
     width: min(900px, 100%);
 }
 
-/* ==================================================
+/* ------------------------------
    タイトル画面
-   ================================================== */
+------------------------------ */
 
 .title-screen {
     text-align: center;
 }
 
 .logo-small {
-    color: #777c86;
-    font-size: 13px;
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 700;
+
     letter-spacing: 0.35em;
-    margin-bottom: 18px;
+
+    margin-bottom: 20px;
 }
 
 .title {
-    font-size: clamp(42px, 8vw, 82px);
-    font-weight: 900;
-    letter-spacing: 0.08em;
     margin: 0;
+
+    font-size: clamp(48px, 9vw, 90px);
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
 
     background:
         linear-gradient(
@@ -118,21 +138,38 @@ body::before {
 
     -webkit-background-clip: text;
     background-clip: text;
+
     color: transparent;
+
+    filter:
+        drop-shadow(0 0 25px rgba(255,255,255,0.08));
 }
 
 .subtitle {
-    color: var(--text-muted);
-    margin-top: 15px;
-    font-size: 15px;
+    margin-top: 18px;
+
+    color: #aeb2bd;
+
+    font-size: 16px;
     letter-spacing: 0.15em;
 }
 
+/* 五色ライン */
+
 .finger-line {
     display: flex;
-    width: min(550px, 90%);
-    height: 4px;
+
+    width: min(600px, 90%);
+    height: 5px;
+
     margin: 45px auto;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.08);
 }
 
 .finger-line span {
@@ -159,9 +196,9 @@ body::before {
     background: var(--pinky);
 }
 
-/* ==================================================
-   ボタン
-   ================================================== */
+/* ------------------------------
+   共通ボタン
+------------------------------ */
 
 button {
     font-family: inherit;
@@ -170,31 +207,49 @@ button {
 .start-button,
 .next-button,
 .retry-button {
-    border: 1px solid #555b67;
-    background: #181b21;
+
+    border: 1px solid rgba(255,255,255,0.22);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.02)
+        );
+
     color: white;
 
-    padding: 16px 42px;
+    padding: 17px 48px;
 
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+
+    letter-spacing: 0.12em;
+
+    border-radius: 8px;
 
     cursor: pointer;
 
     transition:
-        transform 0.15s,
-        background 0.15s,
-        border-color 0.15s,
-        box-shadow 0.15s;
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .start-button:hover,
 .next-button:hover,
 .retry-button:hover {
-    background: #242832;
-    border-color: #9da3ae;
-    transform: translateY(-2px);
+
+    transform: translateY(-3px);
+
+    border-color: var(--middle);
+
+    background:
+        rgba(166,108,255,0.12);
+
+    box-shadow:
+        0 10px 35px rgba(166,108,255,0.15);
 }
 
 .start-button:active,
@@ -203,31 +258,42 @@ button {
     transform: translateY(0);
 }
 
-/* ==================================================
+/* ------------------------------
    質問画面
-   ================================================== */
+------------------------------ */
 
 .question-header {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    color: var(--text-muted);
-    font-size: 13px;
-    letter-spacing: 0.1em;
+    color: var(--muted);
 
-    margin-bottom: 15px;
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    margin-bottom: 12px;
 }
 
 .progress-container {
-    height: 3px;
-    background: #252831;
-    margin-bottom: 45px;
+
+    height: 4px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 999px;
+
+    overflow: hidden;
+
+    margin-bottom: 30px;
 }
 
 .progress-bar {
+
     height: 100%;
-    width: 0%;
 
     background:
         linear-gradient(
@@ -239,219 +305,423 @@ button {
             var(--pinky)
         );
 
-    transition: width 0.3s ease;
+    border-radius: 999px;
+
+    transition:
+        width 0.4s ease;
 }
 
+/* ------------------------------
+   質問カード
+------------------------------ */
+
 .question-card {
+
+    position: relative;
+
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.035),
-            rgba(255,255,255,0.01)
+            rgba(255,255,255,0.065),
+            rgba(255,255,255,0.025)
         );
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
-    padding: clamp(30px, 6vw, 65px);
+    border-radius: 20px;
+
+    padding:
+        clamp(30px, 6vw, 65px);
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,0.35);
+        0 30px 90px rgba(0,0,0,0.4);
+
+    backdrop-filter: blur(10px);
+
+    overflow: hidden;
+}
+
+/* カード上部の五色ライン */
+
+.question-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--thumb),
+            var(--index),
+            var(--middle),
+            var(--ring),
+            var(--pinky)
+        );
 }
 
 .question-number {
-    color: #777d88;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    margin-bottom: 25px;
+
+    color: #777d89;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.25em;
+
+    margin-bottom: 22px;
 }
 
 .question-text {
-    font-size: clamp(21px, 4vw, 31px);
-    line-height: 1.8;
-    font-weight: 700;
+
     margin: 0 0 45px;
+
+    font-size:
+        clamp(21px, 4vw, 31px);
+
+    line-height: 1.8;
+
+    font-weight: 700;
+
+    letter-spacing: 0.02em;
 }
 
-/* 回答 */
+/* ------------------------------
+   回答ボタン
+------------------------------ */
 
 .answers {
+
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 10px;
 }
 
 .answer-button {
-    min-height: 100px;
 
-    border: 1px solid #343944;
-    background: #101217;
+    position: relative;
 
-    color: #c9ccd2;
+    min-height: 115px;
 
-    padding: 14px 8px;
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    border-radius: 12px;
+
+    background:
+        rgba(10,12,17,0.75);
+
+    color: #d0d3da;
+
+    padding: 15px 8px;
 
     cursor: pointer;
 
     transition:
-        transform 0.15s,
-        background 0.15s,
-        border-color 0.15s,
-        color 0.15s;
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
 .answer-button:hover {
-    background: #1e222b;
-    border-color: #858b97;
+
+    transform: translateY(-5px);
+
     color: white;
-    transform: translateY(-3px);
+
+    background:
+        rgba(166,108,255,0.10);
+
+    border-color:
+        rgba(166,108,255,0.65);
+
+    box-shadow:
+        0 12px 30px rgba(166,108,255,0.12);
 }
 
 .answer-number {
+
     display: block;
-    font-size: 22px;
+
+    font-size: 24px;
     font-weight: 900;
-    margin-bottom: 8px;
+
+    margin-bottom: 10px;
+
+    color: #ffffff;
 }
 
 .answer-label {
+
+    display: block;
+
     font-size: 12px;
+
     line-height: 1.5;
 }
 
-/* ==================================================
+/* 5段階回答それぞれに色を付ける */
+
+.answer-button:nth-child(1):hover {
+    border-color: var(--thumb);
+    background: rgba(229,57,53,0.12);
+}
+
+.answer-button:nth-child(2):hover {
+    border-color: var(--index);
+    background: rgba(85,217,255,0.10);
+}
+
+.answer-button:nth-child(3):hover {
+    border-color: var(--middle);
+    background: rgba(166,108,255,0.12);
+}
+
+.answer-button:nth-child(4):hover {
+    border-color: var(--ring);
+    background: rgba(255,157,69,0.12);
+}
+
+.answer-button:nth-child(5):hover {
+    border-color: var(--pinky);
+    background: rgba(77,124,255,0.12);
+}
+
+/* ------------------------------
    結果画面
-   ================================================== */
+------------------------------ */
 
 .result-screen {
     text-align: center;
 }
 
 .result-label {
-    color: #777d88;
-    font-size: 13px;
-    letter-spacing: 0.3em;
-    margin-bottom: 10px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.35em;
+
+    margin-bottom: 15px;
 }
 
 .result-finger {
-    font-size: clamp(48px, 10vw, 90px);
-    font-weight: 900;
+
     margin: 0;
+
+    font-size:
+        clamp(55px, 11vw, 100px);
+
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+
+    text-shadow:
+        0 0 35px currentColor;
 }
 
 .result-subtitle {
-    color: #999ea8;
-    letter-spacing: 0.2em;
+
+    color: #9ca1ad;
+
     margin-top: 8px;
+
+    font-size: 13px;
+
+    letter-spacing: 0.3em;
 }
 
 .result-description {
-    max-width: 650px;
-    margin: 35px auto 50px;
 
-    color: #c5c8ce;
+    max-width: 680px;
+
+    margin:
+        35px auto 50px;
+
+    color: #c8cbd2;
+
     line-height: 2;
+
+    font-size: 15px;
 }
 
-/* ランキング */
+/* ------------------------------
+   ランキング
+------------------------------ */
 
 .ranking {
+
     text-align: left;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 25px;
+
+    background:
+        rgba(17,19,26,0.85);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.3);
 }
 
 .ranking-title {
-    font-size: 13px;
+
     color: #777d88;
-    letter-spacing: 0.15em;
-    margin-bottom: 25px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.2em;
+
+    margin-bottom: 28px;
 }
 
 .rank-row {
-    margin-bottom: 20px;
+
+    margin-bottom: 22px;
 }
 
 .rank-info {
+
     display: flex;
+
     justify-content: space-between;
-    margin-bottom: 7px;
+    align-items: center;
+
+    margin-bottom: 8px;
 }
 
 .rank-name {
+
     font-weight: 700;
 }
 
 .rank-score {
-    color: #9297a1;
-    font-size: 13px;
+
+    color: #9297a3;
+
+    font-size: 12px;
 }
 
 .score-background {
-    height: 8px;
-    background: #292c34;
+
+    height: 9px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border-radius: 999px;
+
+    overflow: hidden;
 }
 
 .score-bar {
+
     height: 100%;
-    width: 0%;
-    transition: width 0.8s ease;
+
+    border-radius: 999px;
+
+    transition:
+        width 0.8s ease;
 }
 
 .score-bar.thumb {
     background: var(--thumb);
+    box-shadow: 0 0 12px rgba(229,57,53,0.5);
 }
 
 .score-bar.index {
     background: var(--index);
+    box-shadow: 0 0 12px rgba(85,217,255,0.5);
 }
 
 .score-bar.middle {
     background: var(--middle);
+    box-shadow: 0 0 12px rgba(166,108,255,0.5);
 }
 
 .score-bar.ring {
     background: var(--ring);
+    box-shadow: 0 0 12px rgba(255,157,69,0.5);
 }
 
 .score-bar.pinky {
     background: var(--pinky);
+    box-shadow: 0 0 12px rgba(77,124,255,0.5);
 }
 
-/* ==================================================
-   レスポンシブ
-   ================================================== */
+/* ------------------------------
+   スマホ対応
+------------------------------ */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
     #app {
         padding: 20px 12px;
     }
 
     .question-card {
-        padding: 25px 18px;
+        padding: 30px 20px;
+        border-radius: 15px;
     }
 
     .answers {
+
         grid-template-columns: 1fr;
+
+        gap: 8px;
     }
 
     .answer-button {
+
         min-height: 65px;
+
         display: flex;
+
         align-items: center;
+
         gap: 15px;
+
         text-align: left;
+
         padding: 12px 18px;
     }
 
     .answer-number {
+
+        width: 28px;
+
         margin: 0;
-        width: 25px;
+
+        flex-shrink: 0;
+    }
+
+    .answer-label {
+        font-size: 13px;
     }
 
     .question-text {
         font-size: 20px;
+    }
+
+    .ranking {
+        padding: 20px;
     }
 }
